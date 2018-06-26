@@ -9,11 +9,12 @@ Finished:
 7) Dictionary
 8) Binary search tree
 9) Basic sorting algorithms
+10) Hashset
 
 TODO:
 
-10) Graphs
-11) Heaps
-12) Advanced binary trees
-13) Advanced sorting (quick, merge, heap etc.)
-14) Clean-up unit tests
+11) Graphs
+12) Heaps
+13) Advanced binary trees
+14) Advanced sorting (quick, merge, heap etc.)
+15) Clean-up unit tests

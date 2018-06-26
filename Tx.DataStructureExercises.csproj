@@ -65,6 +65,10 @@
     <Compile Include="Queue\ISimpleQueue.cs" />
     <Compile Include="Queue\SimpleQueue.cs" />
     <Compile Include="Queue\SimpleQueueTests.cs" />
+    <Compile Include="Dictionary\BucketList.cs" />
+    <Compile Include="Set\ISimpleSet.cs" />
+    <Compile Include="Set\SimpleHashSetTests.cs" />
+    <Compile Include="Set\SimpleHashSet.cs" />
     <Compile Include="SortedList\ISimpleSortedList.cs" />
     <Compile Include="SortedList\SimpleSortedList.cs" />
     <Compile Include="SortedList\SimpleSortedListTests.cs" />
@@ -79,6 +83,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+    <None Include="README.md" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
