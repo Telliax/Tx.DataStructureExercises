@@ -49,6 +49,9 @@
     <Compile Include="BinaryTree\SimpleBinaryTree.cs" />
     <Compile Include="BinaryTree\SimpleBinaryTreeTests.cs" />
     <Compile Include="BinaryTree\ISimpleBinaryTree.cs" />
+    <Compile Include="BitArray\SimpleBitArray.cs" />
+    <Compile Include="BitArray\IBitArray.cs" />
+    <Compile Include="BitArray\SimpleBitArrayTests.cs" />
     <Compile Include="Collection\ISimpleCollection.cs" />
     <Compile Include="Collection\SimpleCollection.cs" />
     <Compile Include="Collection\SimpleCollectionTests.cs" />
