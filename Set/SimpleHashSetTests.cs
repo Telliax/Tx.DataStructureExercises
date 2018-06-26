@@ -135,6 +135,53 @@ namespace Tx.DataStructureExersises.Set
             Assert.AreEqual(expected.Contains("1"), set.Contains("1"));
         }
 
+        [Test]
+        public void Union_Test()
+        {
+            var range1 = new[] { "1", "2", "3", "4", "5", "6", "7" };
+            var range2 = new[] { "1", "10", "9", "8", "7" };
+            var set1 = CreateSet(range1);
+            var set2 = CreateSet(range2);
+            var union = set1.Union(set2);
+            var expected = new HashSet<string>(range1);
+            expected.UnionWith(range2);
+
+            CollectionAssert.AreEquivalent(expected, union);
+            Assert.AreEqual(expected.Count, union.Count);
+        }
+
+
+        [Test]
+        public void Intersect_Test()
+        {
+            var range1 = new[] { "1", "2", "3", "4", "5", "6", "7" };
+            var range2 = new[] { "1", "10", "9", "8", "7" };
+            var set1 = CreateSet(range1);
+            var set2 = CreateSet(range2);
+            var intersection = set1.Intersect(set2);
+            var expected = new HashSet<string>(range1);
+            expected.IntersectWith(range2);
+
+            CollectionAssert.AreEquivalent(expected, intersection);
+            Assert.AreEqual(expected.Count, intersection.Count);
+        }
+
+
+        [Test]
+        public void Diff_Test()
+        {
+            var range1 = new[] { "1", "2", "3", "4", "5", "6", "7" };
+            var range2 = new[] { "1", "10", "9", "8", "7" };
+            var set1 = CreateSet(range1);
+            var set2 = CreateSet(range2);
+            var diff = set1.Diff(set2);
+            var expected = new HashSet<string>(range1);
+            expected.ExceptWith(range2);
+
+            CollectionAssert.AreEquivalent(expected, diff);
+            Assert.AreEqual(expected.Count, diff.Count);
+        }
+
 
         [Test]
         public void InvalidOperation_Tests()
