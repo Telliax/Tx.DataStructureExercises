@@ -47,6 +47,10 @@ namespace Tx.DataStructureExersises.Dictionary
             expected["1"] = 2;
 
             Assert.AreEqual(dict["1"], expected["1"]);
+            CollectionAssert.AreEquivalent(expected, dict);
+            CollectionAssert.AreEquivalent(expected.Keys, dict.Keys);
+            CollectionAssert.AreEquivalent(expected.Values, dict.Values);
+            Assert.AreEqual(expected.Count, dict.Count);
         }
 
         [Test]
@@ -68,7 +72,7 @@ namespace Tx.DataStructureExersises.Dictionary
         }
 
         [Test]
-        public void Remove_Test()
+        public void Remove_ExistingKeys_AreRemoved()
         {
             var dict = CreateDictionary();
             var expected = new Dictionary<string, int>();
@@ -86,6 +90,28 @@ namespace Tx.DataStructureExersises.Dictionary
                 expected.Remove(key);
                 Assert.AreEqual(expected.ContainsKey(key), dict.Contains(key));
             }
+
+            CollectionAssert.AreEquivalent(expected, dict);
+            CollectionAssert.AreEquivalent(expected.Keys, dict.Keys);
+            CollectionAssert.AreEquivalent(expected.Values, dict.Values);
+            Assert.AreEqual(expected.Count, dict.Count);
+        }
+
+        [TestCase("1000")]
+        [TestCase("absdc")]
+        public void Remove_NonExistingKeys_DoNotChangeDictionary(string testKey)
+        {
+            var dict = CreateDictionary();
+            var expected = new Dictionary<string, int>();
+            foreach (var i in Enumerable.Range(0, 100))
+            {
+                var key = i.ToString();
+                dict[key] = i;
+                expected[key] = i;
+            }
+
+            dict.Remove(testKey);
+            expected.Remove(testKey);
 
             CollectionAssert.AreEquivalent(expected, dict);
             CollectionAssert.AreEquivalent(expected.Keys, dict.Keys);
@@ -163,6 +189,12 @@ namespace Tx.DataStructureExersises.Dictionary
             dict.Add("1", 1);
             Assert.Throws<InvalidOperationException>(() => dict.Add("1", 2));
             Assert.Throws<KeyNotFoundException>(() => dict["3"].ToString());
+            Assert.Throws<ArgumentNullException>(() => dict[null].ToString());
+            Assert.Throws<ArgumentNullException>(() => dict[null] = 2);
+            Assert.Throws<ArgumentNullException>(() => dict.Add(null, 2));
+            Assert.Throws<ArgumentNullException>(() => dict.Remove(null));
+            Assert.Throws<ArgumentNullException>(() => dict.Contains(null));
+            Assert.Throws<ArgumentNullException>(() => dict.TryGetValue(null, out var value));
         }
 
         protected virtual ISimpleDictionary<string, int> CreateDictionary() => new SimpleDictionary<string, int>();

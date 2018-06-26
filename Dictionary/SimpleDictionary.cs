@@ -27,15 +27,21 @@ namespace Tx.DataStructureExersises.Dictionary
 
         public void Add(TKey key, TValue value) => Add(key, value, throwIfExists:true);
 
-        public bool TryGetValue(TKey key, out TValue value) => FindBucket(key).TryGetValue(key, out value);
+        public bool TryGetValue(TKey key, out TValue value)
+        {
+            var bucket = FindBucket(key);
+            return bucket.TryGetValue(key, out value);
+        } 
 
         public bool Contains(TKey key) => TryGetValue(key, out var value);
 
         public void Remove(TKey key)
         {
             var bucket = FindBucket(key);
-            bucket.Remove(key);
-            Count--;
+            if (bucket.Remove(key))
+            {
+                Count--;
+            }
         }
 
         public void Clear()
@@ -59,6 +65,7 @@ namespace Tx.DataStructureExersises.Dictionary
 
         private static Bucket FindBucket(Bucket[] buckets, TKey key)
         {
+            if (key == null) throw new ArgumentNullException(nameof(key));
             var index = Math.Abs(key.GetHashCode()) % buckets.Length;
             var bucket = buckets[index];
             if (bucket == null)
@@ -73,8 +80,10 @@ namespace Tx.DataStructureExersises.Dictionary
             CheckSize();
             var newPair = new KeyValuePair<TKey, TValue>(key, value);
             var bucket = FindBucket(key);
-            bucket.Add(newPair, throwIfExists);
-            Count++;
+            if (bucket.Add(newPair, throwIfExists))
+            {
+                Count++;
+            }
         }
 
         private void CheckSize()
@@ -91,7 +100,7 @@ namespace Tx.DataStructureExersises.Dictionary
 
         private class Bucket : IEnumerable<KeyValuePair<TKey, TValue>>
         {
-            public void Add(KeyValuePair<TKey, TValue> pair, bool throwIfExists)
+            public bool Add(KeyValuePair<TKey, TValue> pair, bool throwIfExists)
             {
                 for (int i = 0; i < _items.Count; i++)
                 {
@@ -103,13 +112,14 @@ namespace Tx.DataStructureExersises.Dictionary
                             throw new InvalidOperationException($"Key '{pair.Key}' already exists!");
                         }
                         _items[i] = pair;
-                        return;
+                        return false;
                     }
                 }
                 _items.Add(pair);
+                return true;
             }
 
-            public void Remove(TKey key)
+            public bool Remove(TKey key)
             {
                 for (int i = 0; i < _items.Count; i++)
                 {
@@ -117,9 +127,10 @@ namespace Tx.DataStructureExersises.Dictionary
                     if (pair.Key.Equals(key))
                     {
                         _items.RemoveAt(i);
-                        return;
+                        return true;
                     }
                 }
+                return false;
             }
 
             public void Clear() => _items.Clear();

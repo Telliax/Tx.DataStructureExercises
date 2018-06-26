@@ -43,6 +43,7 @@ namespace Tx.DataStructureExersises.Sort
                     if (list[j] > list[i])
                     {
                         list.Move(i, j);
+                        break;
                     }
                 }
             }
