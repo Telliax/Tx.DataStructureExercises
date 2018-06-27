@@ -48,9 +48,10 @@ namespace Tx.DataStructureExersises.BitArray
 
         public void SetAll(bool value)
         {
-            for (int i = 0; i < Count; i++)
+            var val = value ? byte.MaxValue : byte.MinValue;
+            for (int i = 0; i < _bytes.Length; i++)
             {
-                this[i] = value;
+                _bytes[i] = val;
             }
         }
 
