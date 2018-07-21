@@ -68,6 +68,16 @@ namespace Tx.DataStructureExersises.Sort
         [TestCase(5, 3, 9, 4, 10, 2, 7, 1, 8, 6)]
         public void QuickSort_Test(params int[] testCase) => TestSort(testCase, l => l.QuickSort());
 
+        [TestCase]
+        [TestCase(1, 1, 1, 1, 1)]
+        [TestCase(1, 2, 1, 2, 2, 1)]
+        [TestCase(10, 9, 8, 7, 6, 5, 4, 3, 2, 1)]
+        [TestCase(1, 2, 3, 4, 5, 6, 7, 8, 9, 10)]
+        [TestCase(1, 2, 5, 6, 3, 4, 9, 10, 7, 8)]
+        [TestCase(10, 7, 6, 9, 8, 5, 2, 4, 3, 1)]
+        [TestCase(5, 3, 9, 4, 10, 2, 7, 1, 8, 6)]
+        public void HeapSort_Test(params int[] testCase) => TestSort(testCase, l => l.HeapSort());
+
         private void TestSort(int[] input, Action<ISimpleList<int>> sort)
         {
             var actual = new SimpleList<int>(input);

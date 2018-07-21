@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Runtime.CompilerServices;
+using Tx.DataStructureExersises.Heap;
 using Tx.DataStructureExersises.List;
 
 namespace Tx.DataStructureExersises.Sort
@@ -163,6 +164,20 @@ namespace Tx.DataStructureExersises.Sort
             }
             list.Swap(wall, end);
             return wall;
+        }
+
+        public static void HeapSort(this ISimpleList<int> list)
+        {
+            var heap = new SimpleHeap<int>();
+            foreach (var value in list)
+            {
+                heap.Insert(value);
+            }
+            list.Clear();
+            while (heap.Count > 0)
+            {
+                list.Add(heap.RemoveTop());
+            }
         }
     }
 }

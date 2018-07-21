@@ -58,6 +58,8 @@
     <Compile Include="Dictionary\ISimpleDictionary.cs" />
     <Compile Include="Dictionary\SimpleDictionary.cs" />
     <Compile Include="Dictionary\SimpleDictionaryTests.cs" />
+    <Compile Include="Heap\ISimpleHeap.cs" />
+    <Compile Include="Heap\SimpleMinHeap.cs" />
     <Compile Include="LinkedList\ISimpleLinkedList.cs" />
     <Compile Include="LinkedList\SimpleLinkedList.cs" />
     <Compile Include="LinkedList\SimpleLinkedListTests.cs" />
